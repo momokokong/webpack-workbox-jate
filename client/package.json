@@ -22,7 +22,9 @@
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.0.0",
     "webpack-pwa-manifest": "^4.3.0",
-    "workbox-webpack-plugin": "^6.2.4"
+    "workbox-webpack-plugin": "^6.2.4",
+    "mini-css-extract-plugin": "^2.4.5",
+    "clean-webpack-plugin": "^4.0.0"
   },
   "dependencies": {
     "code-mirror-themes": "^1.0.0",

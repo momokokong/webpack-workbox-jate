@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
@@ -18,6 +20,10 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+      new CleanWebpackPlugin({
+        protectWebpackAssets: false,
+        cleanAfterEveryBuildPatterns: ['*.LICENSE.txt'],
+      }),
       new HtmlWebpackPlugin({
         template: './index.html',
         title: 'Webpack Plugin',
@@ -27,6 +33,23 @@ module.exports = () => {
         swSrc: './src-sw.js',
         swDest: 'service-worker.js',
       }), 
+      new WebpackPwaManifest({
+        name: 'Just Another Text Editor',
+        short_name: 'JATE',
+        description: 'Just Another Text Editor',
+        background_color: 'gray',
+        theme_color: 'gray',
+        start_url: './',
+        publicPath: './',
+        fingerprints: false,
+        icons: [
+          {
+            src: path.resolve('./src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('./assets/', 'icons'),
+          },
+        ],
+      }),
     ],
 
     module: {
