@@ -26,6 +26,7 @@ module.exports = () => {
       // }),
       new HtmlWebpackPlugin({
         template: './index.html',
+        favicon: './favicon.ico',
       }),
       new MiniCssExtractPlugin(),
       new InjectManifest({
@@ -58,7 +59,7 @@ module.exports = () => {
           use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
         {
-          test: /\.png$/i,
+          test: /\.ico$/i,
           type: 'asset/resource',
         },
         {
