@@ -20,13 +20,12 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      new CleanWebpackPlugin({
-        protectWebpackAssets: false,
-        cleanAfterEveryBuildPatterns: ['*.LICENSE.txt'],
-      }),
+      // new CleanWebpackPlugin({
+      //   protectWebpackAssets: false,
+      //   cleanAfterEveryBuildPatterns: ['*.LICENSE.txt'],
+      // }),
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'Webpack Plugin',
       }),
       new MiniCssExtractPlugin(),
       new InjectManifest({
