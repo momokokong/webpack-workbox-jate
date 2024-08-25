@@ -27,6 +27,12 @@ if (typeof editor === 'undefined') {
 if ('serviceWorker' in navigator) {
   // register workbox service worker
   const workboxSW = new Workbox('/service-worker.js');
+
+  // if sw is activated, hide the install button
+  workboxSW.addEventListener('activated', () => {
+      document.getElementById('buttonInstall').classList.add('hidden');
+  });
+
   workboxSW.register();
 } else {
   console.error('Service workers are not supported in this browser.');

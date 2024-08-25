@@ -12,7 +12,7 @@ const initdb = async () =>
     },
   });
 
-// TODO: Add logic to a method that accepts some content and adds it to the database
+// always update id 1 given there is only one string holds all text inputs
 export const putDb = async (content) => {
   console.log('putDB');
   const jateDb = await openDB('jate', 1);
@@ -23,7 +23,8 @@ export const putDb = async (content) => {
   console.log('Data saved to the database', result);
 };
 
-// TODO: Add logic for a method that gets all the content from the database
+
+// get data from DB.  if JATE is loaded the first time, return null so the editor would load JATE header.
 export const getDb = async () => {
   console.log('GET from the database');
   const jateDb = await openDB('jate', 1);

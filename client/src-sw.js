@@ -63,4 +63,14 @@ registerRoute(
 );
 
 
+// below section is to force sw to activate over once installed.  This is to remove the install button if sw is already installed.
+// see index.js for detail
+self.addEventListener('install', function(event) {
+  event.waitUntil(self.skipWaiting()); // Activate worker immediately
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(self.clients.claim()); // Become available to all pages
+});
+
 

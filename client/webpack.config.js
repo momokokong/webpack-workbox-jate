@@ -1,12 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// commented out for now.  this is to remove *.license.txt
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
-
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
 
 module.exports = () => {
   return {
@@ -20,6 +18,7 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+      // commented out for now.  this is to remove *.license.txt
       // new CleanWebpackPlugin({
       //   protectWebpackAssets: false,
       //   cleanAfterEveryBuildPatterns: ['*.LICENSE.txt'],
@@ -32,13 +31,14 @@ module.exports = () => {
       new InjectManifest({
         swSrc: './src-sw.js',
         swDest: 'service-worker.js',
-      }), 
+      }),
+      // Manifest per requirement 
       new WebpackPwaManifest({
         name: 'Just Another Text Editor',
         short_name: 'JATE',
         description: 'Just Another Text Editor',
-        background_color: 'gray',
-        theme_color: 'gray',
+        background_color: '#225ca3',
+        theme_color: '#225ca3',
         start_url: './',
         publicPath: './',
         fingerprints: false,
