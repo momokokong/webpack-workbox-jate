@@ -28,7 +28,7 @@ if ('serviceWorker' in navigator) {
   // register workbox service worker
   const workboxSW = new Workbox('/service-worker.js');
 
-  // if sw is activated, hide the install button
+  // if sw is activated, hide the install button.  Works for the live version but not sw version.
   workboxSW.addEventListener('activated', () => {
       document.getElementById('buttonInstall').classList.add('hidden');
   });

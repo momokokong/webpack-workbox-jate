@@ -26,44 +26,13 @@ warmStrategyCache({
 
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
-// TODO: Implement asset caching
-registerRoute(
-  ({ request }) => {
-    return (
-      // CSS
-      request.destination === 'style' ||
-      // JavaScript
-      request.destination === 'script'
-    );
-  },
-  new StaleWhileRevalidate({
-    cacheName: 'static-resources',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({ request }) => request.destination === 'image',
-  new CacheFirst({
-    cacheName: 'my-image-cache',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
-      }),
-    ],
-  })
-);
+precacheAndRoute([{url:"manifest.json", revision: '383676'}]);
+precacheAndRoute([{url:"assets/icons/icon_96x96.png", revision: '1'}]);
+precacheAndRoute([{url:"assets/icons/icon_192x192.png", revision: '1'}]);
 
 
-// below section is to force sw to activate over once installed.  This is to remove the install button if sw is already installed.
+// below section is to force sw to activate once installed.  This is to remove the install button from live version 
+// if sw is already installed.
 // see index.js for detail
 self.addEventListener('install', function(event) {
   event.waitUntil(self.skipWaiting()); // Activate worker immediately
